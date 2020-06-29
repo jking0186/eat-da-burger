@@ -6,16 +6,34 @@ var connection = require("config/connection.js");
 
 const orm = {
     // selectAll()
-    selectAll: function(){
-
+    selectAll: function(tableInput, callback){
+        var query = "SELECT * FROM ??" + tableInput;
+        connection.query(query, function(err, result) {
+            if(err) {
+                throw err;
+            }
+            callback(result);
+        })
     },
     // insertOne()
-    insertOne: function(){
-
+    insertOne: function(tableInput, object, callback) {
+        var query = "INSERT INTO ?? SET ?"; 
+        connection.query(query, [tableInput, object], function(err, result) {
+            if(err) {
+                throw err;
+            }
+            callback(result);
+        });
     },
     // updateOne()
-    updateOne: function(){
-
+    updateOne: function(tableInput, updateItem, condition, callback) {
+        var query = "UPDATE ?? SET ? WHERE ?";
+        connection.query(query,[tableInput, updateItem, condition, callback], function(err, result) {
+            if(err) {
+                throw err;
+            }
+            callback(result);
+        });
     }
 };
 
