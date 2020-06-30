@@ -1,26 +1,17 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
-var mysql = require("mysql");
+var routes = require("./controllers/burger_controller");
+var app = express();
 
 var PORT = process.env.PORT || 8080;
 
-var app = express();
-var connection = require("./config/connection.js")
-
+app.use("/", routes);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-
-connection.connect(function (err) {
-    if (err) {
-        console.error("error connecting: " + err.stack);
-        return;
-    }
-    console.log("connected as id " + connection.threadId);
-});
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function () {
