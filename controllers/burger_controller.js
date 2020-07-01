@@ -9,12 +9,6 @@ router.get("/", function (req, res) {
 		});
 	});
 });
-router.get("/api/burgers",function(_,res) {
-    burger.all(function(data) {
-        var hbsObj = { burger: data };
-        res.render(hbsObj);
-    });
-});
 router.post("/api/burgers", function (req, res) {
     burger.create(req.body, function(result) {
         res.json({
