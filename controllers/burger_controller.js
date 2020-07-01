@@ -16,7 +16,7 @@ router.get("/api/burgers",function(_,res) {
     });
 });
 router.post("/api/burgers", function (req, res) {
-    burger.create(["name"],req.body.name, function(result) {
+    burger.create(req.body, function(result) {
         res.json({
             id: result.insertID
         });
@@ -26,13 +26,11 @@ router.put("/api/burgers/:id", function (req, res) {
     burger.update({
         devoured: req.body.devoured
     }, {
-        id: req.params.id
+        id: req.body.id
     }, function(result) {
-        if (result.changedRows == 0) {
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
+        if (result.changedRows == 0) 
+        return res.status(404).end();
+        else res.status(200).end();
     });
 });
 // Export Router
