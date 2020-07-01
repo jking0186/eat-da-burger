@@ -1,8 +1,8 @@
 // import orm.js into burger.js
-var orms = require("../config/orm.js");
+var orms = require("../config/orm");
 // create the code that will call the ORM functions using burger specific input for the ORM.
 const burger = {
-    select: function(callback){
+    all: function(callback){
         orms.selectAll("burgers", function(result){
             callback(result);
         });
