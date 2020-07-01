@@ -1,19 +1,22 @@
-// import the following:
-// Express
-var express = require("express");
-// burger.js
-var burger = require("../models/burgers.js")
-// Create the router for the app, and export the router at the end of your file.
+const express = require("express");
+var burger = require("../models/burgers")
 const router = express.Router();
 
-router.get('/burgers',function(req,res){
-    burger.select(function(data){
-        var hbsObj = { burgers: data };
-        res.render('index',hbsObj);
+router.get("/", function (req, res) {
+	burger.all(function(data) {
+		res.render("index", {
+			burgers: data
+		});
+	});
+});
+router.get("/api/burgers",function(_,res) {
+    burger.all(function(data) {
+        var hbsObj = { burger: data };
+        res.render(hbsObj);
     });
 });
 router.post("/api/burgers", function (req, res) {
-    burger.create(req.body, function(result) {
+    burger.create(["name"],req.body.name, function(result) {
         res.json({
             id: result.insertID
         });
@@ -23,7 +26,7 @@ router.put("/api/burgers/:id", function (req, res) {
     burger.update({
         devoured: req.body.devoured
     }, {
-        id: req.body.id
+        id: req.params.id
     }, function(result) {
         if (result.changedRows == 0) {
             return res.status(404).end();
