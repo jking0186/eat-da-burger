@@ -13,7 +13,7 @@ const burger = {
         })
     },
     update: function (updateObj, condition, callback) {
-        orm.updateOne("burgers", updateObj, condition, function (results) {
+        orm.updateOne("burgers", updateObj, condition, function (result) {
             callback(result);
         })
     }
