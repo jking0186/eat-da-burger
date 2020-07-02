@@ -20,3 +20,4 @@ Deployed using Heroku
 
 ## Demo
 
+![eat da burger](public/assets/img/burger_demo.gif)
