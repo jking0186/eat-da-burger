@@ -1,4 +1,4 @@
-USE burgers_db;
+USE b97iqerhbi822b60;
 
 INSERT INTO burgers (burger_name)
 VALUES ("Jalepeño Burger"),
